@@ -13,6 +13,10 @@ class _JogoState extends State<Jogo> {
   var _imageAppPaper = AssetImage("imagens/app_paper.png");
   var _imageAppScissor = AssetImage("imagens/app_scissor.png");
 
+  var _imageUserRock = AssetImage("imagens/user_rock.png");
+  var _imageUserPaper = AssetImage("imagens/user_paper.png");
+  var _imageUserScissor = AssetImage("imagens/user_scissor.png");
+
   var _message = "Choose an option bellow";
   var _fundo = Colors.grey;
   var _colorBar = Colors.green;
@@ -27,17 +31,17 @@ class _JogoState extends State<Jogo> {
     switch( appChoice ){
       case "papel":
         setState(() {
-          this._imageAppPaper = AssetImage("imagens/papel.png");
+          this._imageAppPaper = AssetImage("imagens/app_paper_red.png");
         });
         break;
       case "pedra":
         setState(() {
-          this._imageAppRock = AssetImage("imagens/pedra.png");
+          this._imageAppRock = AssetImage("imagens/app_rock_red.png");
         });
         break;
       case "tesoura":
         setState(() {
-          this._imageAppScissor = AssetImage("imagens/tesoura.png");
+          this._imageAppScissor = AssetImage("imagens/app_scissor_red.png");
         });
         break;
     }
@@ -54,6 +58,9 @@ class _JogoState extends State<Jogo> {
         Future.delayed(const Duration(milliseconds: 3000), (){
           setState(() {
             this._message = "Choose an option";
+            this._imageAppRock = AssetImage("imagens/app_rock.png");
+            this._imageAppPaper = AssetImage("imagens/app_paper.png");
+            this._imageAppScissor = AssetImage("imagens/app_scissor.png");
           });
         });
       });
@@ -73,6 +80,9 @@ class _JogoState extends State<Jogo> {
             this._fundo = Colors.grey;
             this._colorBar = Colors.green;
             this._message = "Choose an option";
+            this._imageAppRock = AssetImage("imagens/app_rock.png");
+            this._imageAppPaper = AssetImage("imagens/app_paper.png");
+            this._imageAppScissor = AssetImage("imagens/app_scissor.png");
           });
         });
 
@@ -84,6 +94,9 @@ class _JogoState extends State<Jogo> {
         Future.delayed(const Duration(milliseconds: 3000), (){
           setState(() {
             this._message = "Choose an option";
+            this._imageAppRock = AssetImage("imagens/app_rock.png");
+            this._imageAppPaper = AssetImage("imagens/app_paper.png");
+            this._imageAppScissor = AssetImage("imagens/app_scissor.png");
           });
         });
       });
@@ -110,9 +123,9 @@ class _JogoState extends State<Jogo> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Image.asset("imagens/app_paper.png", height: 70,),
-                Image.asset("imagens/app_rock.png", height: 70,),
-                Image.asset("imagens/app_scissor.png", height: 70,),
+                Image(image: this._imageAppPaper, height: 70,),
+                Image(image: this._imageAppRock, height: 70,),
+                Image(image: this._imageAppScissor, height: 70,),
               ],
             ),
           ),

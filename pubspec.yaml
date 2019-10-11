@@ -47,10 +47,7 @@ flutter:
   #  - images/a_dot_ham.jpeg
 
   assets:
-    - imagens/padrao.png
-    - imagens/papel.png
-    - imagens/pedra.png
-    - imagens/tesoura.png
+
     - imagens/app_paper.png
     - imagens/app_rock.png
     - imagens/app_scissor.png
@@ -58,6 +55,13 @@ flutter:
     - imagens/user_paper.png
     - imagens/user_rock.png
     - imagens/user_scissor.png
+
+    - imagens/app_paper_red.png
+    - imagens/app_rock_red.png
+    - imagens/app_scissor_red.png
+    - imagens/user_paper_red.png
+    - imagens/user_rock_red.png
+    - imagens/user_scissor_red.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
