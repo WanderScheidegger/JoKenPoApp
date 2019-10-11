@@ -21,6 +21,8 @@ class _JogoState extends State<Jogo> {
   var _fundo = Colors.grey;
   var _colorBar = Colors.green;
   var _imageOct = AssetImage("imagens/octogon.png");
+  var _resultado = "Choose an option";
+
 
   void _optionSelected(String userChoice){
 
@@ -54,13 +56,22 @@ class _JogoState extends State<Jogo> {
         (userChoice == "papel" && appChoice == "pedra")
     ){
       setState(() {
-        this._message = "Congrats! You Won!";
+        this._resultado = "Congrats! You Won!";
+        this._message = "";
+        this._fundo = Colors.green;
+
         Future.delayed(const Duration(milliseconds: 3000), (){
           setState(() {
+            this._fundo = Colors.grey;
             this._message = "Choose an option";
+            this._resultado = "Choose an option";
             this._imageAppRock = AssetImage("imagens/app_rock.png");
             this._imageAppPaper = AssetImage("imagens/app_paper.png");
             this._imageAppScissor = AssetImage("imagens/app_scissor.png");
+
+            this._imageUserRock = AssetImage("imagens/user_rock.png");
+            this._imageUserPaper = AssetImage("imagens/user_paper.png");
+            this._imageUserScissor = AssetImage("imagens/user_scissor.png");
           });
         });
       });
@@ -71,18 +82,25 @@ class _JogoState extends State<Jogo> {
         (appChoice == "papel" && userChoice == "pedra")
     ){
       setState(() {
-        this._message = "Sorry! You Loose!";
+        this._resultado = "Sorry! You Loose!";
+        this._message = "";
         this._fundo = Colors.red;
         this._colorBar = Colors.red;
+
         Vibration.vibrate(duration: 1000);
-        Future.delayed(const Duration(milliseconds: 1000), (){
+        Future.delayed(const Duration(milliseconds: 3000), (){
           setState(() {
             this._fundo = Colors.grey;
             this._colorBar = Colors.green;
             this._message = "Choose an option";
+            this._resultado = "Choose an option";
             this._imageAppRock = AssetImage("imagens/app_rock.png");
             this._imageAppPaper = AssetImage("imagens/app_paper.png");
             this._imageAppScissor = AssetImage("imagens/app_scissor.png");
+
+            this._imageUserRock = AssetImage("imagens/user_rock.png");
+            this._imageUserPaper = AssetImage("imagens/user_paper.png");
+            this._imageUserScissor = AssetImage("imagens/user_scissor.png");
           });
         });
 
@@ -90,13 +108,19 @@ class _JogoState extends State<Jogo> {
       //draw
     }else{
       setState(() {
-        this._message = "We Tied!";
+        this._resultado = "We Tied!";
+        this._message = "";
         Future.delayed(const Duration(milliseconds: 3000), (){
           setState(() {
             this._message = "Choose an option";
+            this._resultado = "Choose an option";
             this._imageAppRock = AssetImage("imagens/app_rock.png");
             this._imageAppPaper = AssetImage("imagens/app_paper.png");
             this._imageAppScissor = AssetImage("imagens/app_scissor.png");
+
+            this._imageUserRock = AssetImage("imagens/user_rock.png");
+            this._imageUserPaper = AssetImage("imagens/user_paper.png");
+            this._imageUserScissor = AssetImage("imagens/user_scissor.png");
           });
         });
       });
@@ -134,7 +158,30 @@ class _JogoState extends State<Jogo> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Image(image: this._imageOct, height: 300,),
+                Stack(
+                  alignment: const Alignment(0, 0),
+                  children: <Widget>[
+                    Image(image: this._imageOct, height: 300,),
+                    Center(
+                      child: Text(
+                        _resultado,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          shadows: [
+                            Shadow(
+                              blurRadius: 1.0,
+                              color: Colors.white,
+                              offset: Offset(0.5,0.5),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
@@ -142,16 +189,31 @@ class _JogoState extends State<Jogo> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               GestureDetector(
-                onTap: () => _optionSelected("papel"),
-                child: Image.asset("imagens/user_paper.png", height: 70,),
+                onTap: (){
+                  _optionSelected("papel");
+                  setState(() {
+                    this._imageUserPaper = AssetImage("imagens/user_paper_red.png");
+                  });
+                },
+                child: Image(image: this._imageUserPaper, height: 70,),
               ),
               GestureDetector(
-                onTap: () => _optionSelected("pedra"),
-                child: Image.asset("imagens/user_rock.png", height: 70,),
+                onTap: () {
+                  _optionSelected("pedra");
+                  setState(() {
+                    this._imageUserRock = AssetImage("imagens/user_rock_red.png");
+                  });
+                },
+                child: Image(image: this._imageUserRock, height: 70,),
               ),
               GestureDetector(
-                onTap: () => _optionSelected("tesoura"),
-                child: Image.asset("imagens/user_scissor.png", height: 70,),
+                onTap: () {
+                  _optionSelected("tesoura");
+                  setState(() {
+                    this._imageUserScissor = AssetImage("imagens/user_scissor_red.png");
+                  });
+                },
+                child: Image(image: this._imageUserScissor, height: 70,),
               ),
             ],
           ),
@@ -161,7 +223,7 @@ class _JogoState extends State<Jogo> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  this._message,
+                  "",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20,
