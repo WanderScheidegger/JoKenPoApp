@@ -9,7 +9,10 @@ class Jogo extends StatefulWidget {
 
 class _JogoState extends State<Jogo> {
 
-  var _imageApp = AssetImage("imagens/padrao.png");
+  var _imageAppRock = AssetImage("imagens/app_rock.png");
+  var _imageAppPaper = AssetImage("imagens/app_paper.png");
+  var _imageAppScissor = AssetImage("imagens/app_scissor.png");
+
   var _message = "Choose an option bellow";
   var _fundo = Colors.grey;
   var _colorBar = Colors.green;
@@ -24,17 +27,17 @@ class _JogoState extends State<Jogo> {
     switch( appChoice ){
       case "papel":
         setState(() {
-          this._imageApp = AssetImage("imagens/papel.png");
+          this._imageAppPaper = AssetImage("imagens/papel.png");
         });
         break;
       case "pedra":
         setState(() {
-          this._imageApp = AssetImage("imagens/pedra.png");
+          this._imageAppRock = AssetImage("imagens/pedra.png");
         });
         break;
       case "tesoura":
         setState(() {
-          this._imageApp = AssetImage("imagens/tesoura.png");
+          this._imageAppScissor = AssetImage("imagens/tesoura.png");
         });
         break;
     }
@@ -107,18 +110,9 @@ class _JogoState extends State<Jogo> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                GestureDetector(
-                  onTap: () => _optionSelected("papel"),
-                  child: Image.asset("imagens/app_paper.png", height: 70,),
-                ),
-                GestureDetector(
-                  onTap: () => _optionSelected("pedra"),
-                  child: Image.asset("imagens/app_rock.png", height: 70,),
-                ),
-                GestureDetector(
-                  onTap: () => _optionSelected("tesoura"),
-                  child: Image.asset("imagens/app_scissor.png", height: 70,),
-                ),
+                Image.asset("imagens/app_paper.png", height: 70,),
+                Image.asset("imagens/app_rock.png", height: 70,),
+                Image.asset("imagens/app_scissor.png", height: 70,),
               ],
             ),
           ),
